@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class QrLibraryService {}
+export class QrLibraryService {
+	getQrMatrix(): string {
+		return "Hello World with a QR Code!";
+	}
+}
