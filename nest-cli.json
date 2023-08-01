@@ -3,6 +3,18 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "qr-library": {
+      "type": "library",
+      "root": "libs/qr-library",
+      "entryFile": "index",
+      "sourceRoot": "libs/qr-library/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/qr-library/tsconfig.lib.json"
+      }
+    }
   }
 }
