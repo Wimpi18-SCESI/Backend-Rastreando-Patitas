@@ -1,1 +1,11 @@
-export type Level = "levelOne" | "levelTwo"
+export type Level =
+  | "levelOne"
+  | "levelTwo"
+  | "levelThree"
+  | "levelFour"
+  | "levelFive"
+  | "levelSix"
+  | "levelSeven"
+  | "levelEight"
+  | "levelNine"
+  | "levelTen"
