@@ -26,6 +26,7 @@ export class QrLibraryService {
     }
 
     this.convertToDataCodewordBytes(aux + bitData.bytePadding);
+
     return bitData;
   }
 
@@ -56,22 +57,21 @@ export class QrLibraryService {
     return res;
   }
 
-  private async calcBytePadding(
-    sumBits: number,
-    securityLevel: SecurityLevel,
-    level: Level,
-  ) {
+
+/**
+ * Función para calcular el relleno de bits necesario para alcanzar una determinada capacidad de bits en un código QR.
+ * @param {number} sumBits - La cantidad de bits existentes en el código QR.
+ * @param {SecurityLevel} securityLevel - El nivel de seguridad que puede ser: [L, M, Q, H].
+ * @param {Level} level - El nivel del código que puede ser: [ levelOne, levelTwo, levelThree, levelFour, levelFive, levelSix, levelSeven, levelEight, levelNine, levelTen].
+ * @returns {string} - Una cadena de bits que representa el relleno de bytes necesario.
+ */
+
+  private calcBytePadding( sumBits: number, securityLevel: SecurityLevel, level: Level )
+  {
     let result = "";
     const limitBiteTable: LimitBitesTable = limitsTable;
-    let numberOfMissingBits = 0;
-    let limitsList = limitBiteTable.ECCLevel[securityLevel][level];
-
-    for (let i = 0; i < sumBits - 1; i++) {
-      if (sumBits < limitsList[i]) {
-        numberOfMissingBits = limitsList[i] - sumBits;
-        break;
-      }
-    }
+    let QRCapacity = limitBiteTable.ECCLevel[securityLevel][level];
+    let numberOfMissingBits = QRCapacity - sumBits;
 
     for (let i = 0; i < numberOfMissingBits / 8; i++) {
       if (i % 2 == 0) result += "11101100";
